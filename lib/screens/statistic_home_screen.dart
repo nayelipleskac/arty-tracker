@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../models/statistic.dart';
 
-class HomeScreen extends StatelessWidget {
+class StatisticHomeScreen extends StatelessWidget {
   final List<Statistic> dummyStat = [
     Statistic(
       id: 's1',
@@ -32,8 +32,8 @@ class HomeScreen extends StatelessWidget {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 3 / 2,
-          crossAxisSpacing: 15,
-          mainAxisSpacing: 16,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
         ),
       ),
     );

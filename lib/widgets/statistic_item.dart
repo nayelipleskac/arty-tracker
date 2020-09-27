@@ -11,10 +11,16 @@ class StatisticItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue,
-      child: GridTile(
-        child: Text(pounds.toString()),
+      padding: EdgeInsets.all(10),
+      child: Text(
+        pounds.toString(),
+        style: Theme.of(context).textTheme.headline6,
       ),
+      decoration: BoxDecoration(
+        color: Colors.blue[200],
+        borderRadius: BorderRadius.circular(15),
+      ),
+      
     );
   }
 }
