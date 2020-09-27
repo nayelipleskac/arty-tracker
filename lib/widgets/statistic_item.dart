@@ -10,8 +10,11 @@ class StatisticItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridTile(
-      child: Text('pounds'),
+    return Container(
+      color: Colors.blue,
+      child: GridTile(
+        child: Text(pounds.toString()),
+      ),
     );
   }
 }
