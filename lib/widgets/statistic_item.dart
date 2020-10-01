@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../screens/statistic_home_screen.dart';
 
@@ -14,20 +15,25 @@ class StatisticItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridTile(
       child: Container(
+        decoration: BoxDecoration(
+          color: Colors.blue[200],
+          borderRadius: BorderRadius.circular(15),
+        ),
         alignment: Alignment.topCenter,
         padding: EdgeInsets.all(10),
         child: Column(
           children: [
             Text(
-              pounds.toString(),
+              pounds.toString() + ' pounds',
               style: Theme.of(context).textTheme.headline6,
             ),
-            Text('another thing'),
+            Text(
+              rolls.toString() + ' rolls',
+            ),
+            Text(
+              DateFormat.yMMMd().format(date),
+            ),
           ],
-        ),
-        decoration: BoxDecoration(
-          color: Colors.blue[200],
-          borderRadius: BorderRadius.circular(15),
         ),
       ),
     );

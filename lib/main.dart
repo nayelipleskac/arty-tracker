@@ -20,12 +20,14 @@ class MyApp extends StatelessWidget {
         textTheme: ThemeData.light().textTheme.copyWith(
               bodyText1: TextStyle(
                 color: Color.fromRGBO(20, 51, 52, 1),
+                fontSize: 18,
               ),
               bodyText2: TextStyle(
                 color: Color.fromRGBO(20, 51, 52, 1),
+                fontSize: 18,
               ),
               headline6: TextStyle(
-                fontSize: 30,
+                fontSize: 35,
                 fontFamily: 'RobotoCondensed',
                 fontWeight: FontWeight.bold,
               ),

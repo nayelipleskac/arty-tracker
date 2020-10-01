@@ -1,3 +1,5 @@
+import '../widgets/drawer.dart';
+
 import '../widgets/statistic_item.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,24 @@ class StatisticHomeScreen extends StatelessWidget {
       rolls: 8,
       date: DateTime.now(),
     ),
+    Statistic(
+      id: 's2',
+      pounds: 50,
+      rolls: 10,
+      date: DateTime.now(),
+    ),
+    Statistic(
+      id: 's3',
+      pounds: 37,
+      rolls: 6,
+      date: DateTime.now(),
+    ),
+    Statistic(
+      id: 's4',
+      pounds: 33,
+      rolls: 7,
+      date: DateTime.now(),
+    ),
   ];
   @override
   Widget build(BuildContext context) {
@@ -20,6 +40,7 @@ class StatisticHomeScreen extends StatelessWidget {
           'Arty Tracker',
         ),
       ),
+      drawer: MainDrawer(),
       body: GridView.builder(
         padding: EdgeInsets.all(10),
         itemCount: dummyStat.length,
