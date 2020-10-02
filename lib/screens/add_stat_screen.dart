@@ -1,9 +1,27 @@
+import 'dart:js';
+
 import '../widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
-class AddStatScreen extends StatelessWidget {
+class AddStatScreen extends StatefulWidget {
   static const routeName = '/addStat';
 
+  Navigator.of(context).pop();
+
+  void _presentDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime.now(),
+    );
+  }
+
+  @override
+  _AddStatScreenState createState() => _AddStatScreenState();
+}
+
+class _AddStatScreenState extends State<AddStatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
