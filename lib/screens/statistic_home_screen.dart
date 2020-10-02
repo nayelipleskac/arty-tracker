@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import '../models/statistic.dart';
 
 class StatisticHomeScreen extends StatelessWidget {
+
+  static const routeName = '/statistic-home';
+
   final List<Statistic> dummyStat = [
     Statistic(
       id: 's1',
@@ -32,6 +35,7 @@ class StatisticHomeScreen extends StatelessWidget {
       date: DateTime.now(),
     ),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

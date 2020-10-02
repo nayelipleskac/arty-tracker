@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../screens/add_stat_screen.dart';
+
+
 class MainDrawer extends StatelessWidget {
   Widget buildListTile(String title, IconData icon, Function tapHandler) {
     return ListTile(
@@ -44,8 +47,12 @@ class MainDrawer extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          buildListTile('Home', Icons.home, () {}),
-          buildListTile('Add', Icons.add, () {}),
+          buildListTile('Home', Icons.home, () {
+            Navigator.of(context).pushReplacementNamed('/');
+          }),
+          buildListTile('Add', Icons.add, () {
+            Navigator.of(context).pushReplacementNamed(AddStatScreen.routeName);
+          }),
         ],
       ),
     );

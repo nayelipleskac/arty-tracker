@@ -1,10 +1,9 @@
 // headline6 = title
 
-import 'screens/statistic_home_screen.dart';
 import 'package:flutter/material.dart';
 
 import './screens/statistic_home_screen.dart';
-import './widgets/statistic_item.dart';
+import './screens/add_stat_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -33,7 +32,12 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: StatisticHomeScreen(),
+      // home: StatisticHomeScreen(),
+      routes: {
+        '/': (ctx) => StatisticHomeScreen(),
+        StatisticHomeScreen.routeName: (ctx) => StatisticHomeScreen(),
+        AddStatScreen.routeName: (ctx) => AddStatScreen(),
+      },
     );
   }
 }
