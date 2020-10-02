@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../screens/add_stat_screen.dart';
 
-
 class MainDrawer extends StatelessWidget {
   Widget buildListTile(String title, IconData icon, Function tapHandler) {
     return ListTile(
