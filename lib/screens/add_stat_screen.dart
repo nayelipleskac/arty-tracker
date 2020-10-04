@@ -1,27 +1,37 @@
-import 'dart:js';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../widgets/drawer.dart';
-import 'package:flutter/material.dart';
 
 class AddStatScreen extends StatefulWidget {
   static const routeName = '/addStat';
-
-  Navigator.of(context).pop();
-
-  void _presentDatePicker() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2020),
-      lastDate: DateTime.now(),
-    );
-  }
 
   @override
   _AddStatScreenState createState() => _AddStatScreenState();
 }
 
 class _AddStatScreenState extends State<AddStatScreen> {
+  //Navigator.of(context).pop();
+
+  DateTime selectedDate;
+
+  void _presentDatePicker(BuildContext context) {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime.now(),
+    ).then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      }
+      setState(() {
+        selectedDate = pickedDate;
+        print(pickedDate);
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,7 +106,7 @@ class _AddStatScreenState extends State<AddStatScreen> {
             Container(
               margin: EdgeInsets.all(10),
               child: RaisedButton(
-                onPressed: () {},
+                onPressed: () => _presentDatePicker(context),
                 color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
                 child: Text('chose date'),
@@ -106,14 +116,18 @@ class _AddStatScreenState extends State<AddStatScreen> {
               padding: EdgeInsets.all(10),
               child: Row(
                 children: <Widget>[
-                  Text('chosen date:'),
-                  Text(
-                    ' No Date Chosen',
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  Text('chosen date: '),
+                  selectedDate == null
+                      ? Text(
+                          ' No Date Chosen',
+                          style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      : Text(
+                          DateFormat.yMMMd().format(selectedDate),
+                        ),
                 ],
               ),
             ),

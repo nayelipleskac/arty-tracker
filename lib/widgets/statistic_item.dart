@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../screens/statistic_home_screen.dart';
 
 class StatisticItem extends StatelessWidget {
   final String id;
