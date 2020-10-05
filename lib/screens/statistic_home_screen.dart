@@ -1,14 +1,18 @@
-import '../widgets/drawer.dart';
-
-import '../widgets/statistic_item.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/drawer.dart';
+import '../widgets/statistic_item.dart';
 import '../models/statistic.dart';
+import './add_stat_screen.dart';
 
-class StatisticHomeScreen extends StatelessWidget {
-
+class StatisticHomeScreen extends StatefulWidget {
   static const routeName = '/statistic-home';
 
+  @override
+  _StatisticHomeScreenState createState() => _StatisticHomeScreenState();
+}
+
+class _StatisticHomeScreenState extends State<StatisticHomeScreen> {
   final List<Statistic> dummyStat = [
     Statistic(
       id: 's1',
@@ -35,6 +39,20 @@ class StatisticHomeScreen extends StatelessWidget {
       date: DateTime.now(),
     ),
   ];
+
+  void _addNewStatistic(int pounds, int rolls, DateTime selectedDate) {
+    final newStat = Statistic(
+      id: DateTime.now().toString(),
+      pounds: pounds,
+      rolls: rolls,
+      date: selectedDate,
+    );
+
+    setState(() {
+      dummyStat.add(newStat);
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {

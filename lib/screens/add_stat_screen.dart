@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../widgets/drawer.dart';
+import '../screens/statistic_home_screen.dart';
+
 
 class AddStatScreen extends StatefulWidget {
   static const routeName = '/addStat';
@@ -11,6 +13,11 @@ class AddStatScreen extends StatefulWidget {
 }
 
 class _AddStatScreenState extends State<AddStatScreen> {
+
+  final Function addStat;
+
+  StatisticHomeScreen(this.addStat);
+
   //Navigator.of(context).pop();
 
   DateTime selectedDate;
@@ -109,7 +116,7 @@ class _AddStatScreenState extends State<AddStatScreen> {
                 onPressed: () => _presentDatePicker(context),
                 color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
-                child: Text('chose date'),
+                child: Text('choose date'),
               ),
             ),
             Container(
@@ -119,7 +126,7 @@ class _AddStatScreenState extends State<AddStatScreen> {
                   Text('chosen date: '),
                   selectedDate == null
                       ? Text(
-                          ' No Date Chosen',
+                          ' No Date Chosen!',
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.bold,
@@ -127,8 +134,25 @@ class _AddStatScreenState extends State<AddStatScreen> {
                         )
                       : Text(
                           DateFormat.yMMMd().format(selectedDate),
+                          style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                 ],
+              ),
+            ),
+            Container(
+              height: 70,
+              alignment: Alignment.center,
+              child: RaisedButton(
+                padding: EdgeInsets.all(15),
+                onPressed: _addNewStatistic,
+                color: Theme.of(context).primaryColor,
+                textColor: Colors.white,
+                child: Text(
+                  'Save Statistic',
+                ),
               ),
             ),
           ],
