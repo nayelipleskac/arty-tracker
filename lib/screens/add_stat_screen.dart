@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import '../widgets/drawer.dart';
 import '../screens/statistic_home_screen.dart';
 
-
 class AddStatScreen extends StatefulWidget {
   static const routeName = '/addStat';
 
@@ -13,12 +12,40 @@ class AddStatScreen extends StatefulWidget {
 }
 
 class _AddStatScreenState extends State<AddStatScreen> {
+  Widget _buildDirectionLabel(String title) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: Text(
+        title,
+        style: TextStyle(
+          fontFamily: 'RobotoCondensed',
+          fontSize: 27,
+        ),
+      ),
+    );
+  }
 
-  final Function addStat;
+  Widget _buildTextField(String labelText) {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: TextField(
+        decoration: InputDecoration(
+          labelText: labelText,
+          icon: Icon(
+            Icons.add_circle,
+            size: 30,
+          ),
+        ),
+        keyboardType: TextInputType.numberWithOptions(decimal: true),
+      ),
+    );
+  }
 
-  StatisticHomeScreen(this.addStat);
+  // final Function addStat;
 
-  //Navigator.of(context).pop();
+  // StatisticHomeScreen(this.addStat);
+
+  ///Navigator.of(context).pop();
 
   DateTime selectedDate;
 
@@ -50,66 +77,17 @@ class _AddStatScreenState extends State<AddStatScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(10),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'add a weight.',
-                style: TextStyle(
-                  fontFamily: 'RobotoCondensed',
-                  fontSize: 27,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: 'Weight:',
-                  icon: Icon(
-                    Icons.add_circle,
-                    size: 30,
-                  ),
-                ),
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
-              ),
-            ),
+            _buildDirectionLabel('add a weight.'),
+            _buildTextField('Weight:'),
             SizedBox(
               height: 30,
             ),
-            Container(
-              padding: EdgeInsets.all(10),
-              child: Text(
-                'add the number of rolls.',
-                style: TextStyle(
-                  fontFamily: 'RobotoCondensed',
-                  fontSize: 27,
-                ),
-              ),
+            _buildDirectionLabel('add the number of rolls.'),
+            _buildTextField('Rolls: '),
+            SizedBox(
+              height: 30,
             ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: 'Rolls:',
-                  icon: Icon(
-                    Icons.add_circle,
-                    size: 30,
-                  ),
-                ),
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              child: Text(
-                'add a date.',
-                style: TextStyle(
-                  fontFamily: 'RobotoCondensed',
-                  fontSize: 27,
-                ),
-              ),
-            ),
+            _buildDirectionLabel('add a date.'),
             Container(
               margin: EdgeInsets.all(10),
               child: RaisedButton(
@@ -147,7 +125,7 @@ class _AddStatScreenState extends State<AddStatScreen> {
               alignment: Alignment.center,
               child: RaisedButton(
                 padding: EdgeInsets.all(15),
-                onPressed: _addNewStatistic,
+                onPressed: () {}, //_addNewStatistic,
                 color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
                 child: Text(

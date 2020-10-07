@@ -13,6 +13,8 @@ class StatisticHomeScreen extends StatefulWidget {
 }
 
 class _StatisticHomeScreenState extends State<StatisticHomeScreen> {
+  
+
   final List<Statistic> dummyStat = [
     Statistic(
       id: 's1',
@@ -40,19 +42,19 @@ class _StatisticHomeScreenState extends State<StatisticHomeScreen> {
     ),
   ];
 
-  void _addNewStatistic(int pounds, int rolls, DateTime selectedDate) {
-    final newStat = Statistic(
-      id: DateTime.now().toString(),
-      pounds: pounds,
-      rolls: rolls,
-      date: selectedDate,
-    );
+  // void _addNewStatistic(int pounds, int rolls, DateTime selectedDate) {
+  //   final newStat = Statistic(
+  //     id: DateTime.now().toString(),
+  //     pounds: pounds,
+  //     rolls: rolls,
+  //     date: selectedDate,
+  //   );
 
-    setState(() {
-      dummyStat.add(newStat);
-    });
+  //   setState(() {
+  //     dummyStat.add(newStat);
+  //   });
 
-  }
+  // }
 
   @override
   Widget build(BuildContext context) {
