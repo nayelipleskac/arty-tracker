@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "792708837238",
+    "firebase_url": "https://arty-tracker.firebaseio.com",
+    "project_id": "arty-tracker",
+    "storage_bucket": "arty-tracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:792708837238:android:3b6b9f03c5ec8f98ba9457",
+        "android_client_info": {
+          "package_name": "com.nayelipleskac.arty_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "792708837238-qgd39iap59etmk692dlk4pjb0p50694i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC98_iZH4bi_l97mYklJBYRUyz4weqM4jQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "792708837238-qgd39iap59etmk692dlk4pjb0p50694i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
