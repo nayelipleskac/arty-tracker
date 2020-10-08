@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 class StatisticItem extends StatelessWidget {
   final String id;
-  final int pounds;
+  final double pounds;
   final int rolls;
   final DateTime date;
 

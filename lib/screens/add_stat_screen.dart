@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../widgets/drawer.dart';
-import '../screens/statistic_home_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddStatScreen extends StatefulWidget {
   static const routeName = '/addStat';
@@ -125,7 +125,15 @@ class _AddStatScreenState extends State<AddStatScreen> {
               alignment: Alignment.center,
               child: RaisedButton(
                 padding: EdgeInsets.all(15),
-                onPressed: () {}, //_addNewStatistic,
+                onPressed: () async {
+                  CollectionReference statistics =
+                      FirebaseFirestore.instance.collection('Statistics');
+                  await statistics.add({
+                    'pounds': 45,
+                    'rolls': 4,
+                    'date': selectedDate,
+                  });
+                },
                 color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
                 child: Text(

@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 class Statistic {
   final String id;
-  final int pounds;
+  final double pounds;
   final int rolls;
   final DateTime date;
 

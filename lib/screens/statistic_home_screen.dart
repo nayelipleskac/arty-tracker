@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/drawer.dart';
 import '../widgets/statistic_item.dart';
 import '../models/statistic.dart';
 import './add_stat_screen.dart';
+
+final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class StatisticHomeScreen extends StatefulWidget {
   static const routeName = '/statistic-home';
@@ -13,34 +16,32 @@ class StatisticHomeScreen extends StatefulWidget {
 }
 
 class _StatisticHomeScreenState extends State<StatisticHomeScreen> {
-  
-
-  final List<Statistic> dummyStat = [
-    Statistic(
-      id: 's1',
-      pounds: 30,
-      rolls: 8,
-      date: DateTime.now(),
-    ),
-    Statistic(
-      id: 's2',
-      pounds: 50,
-      rolls: 10,
-      date: DateTime.now(),
-    ),
-    Statistic(
-      id: 's3',
-      pounds: 37,
-      rolls: 6,
-      date: DateTime.now(),
-    ),
-    Statistic(
-      id: 's4',
-      pounds: 33,
-      rolls: 7,
-      date: DateTime.now(),
-    ),
-  ];
+  // final List<Statistic> dummyStat = [
+  //   Statistic(
+  //     id: 's1',
+  //     pounds: 30,
+  //     rolls: 8,
+  //     date: DateTime.now(),
+  //   ),
+  //   Statistic(
+  //     id: 's2',
+  //     pounds: 50,
+  //     rolls: 10,
+  //     date: DateTime.now(),
+  //   ),
+  //   Statistic(
+  //     id: 's3',
+  //     pounds: 37,
+  //     rolls: 6,
+  //     date: DateTime.now(),
+  //   ),
+  //   Statistic(
+  //     id: 's4',
+  //     pounds: 33,
+  //     rolls: 7,
+  //     date: DateTime.now(),
+  //   ),
+  // ];
 
   // void _addNewStatistic(int pounds, int rolls, DateTime selectedDate) {
   //   final newStat = Statistic(
@@ -65,22 +66,57 @@ class _StatisticHomeScreenState extends State<StatisticHomeScreen> {
         ),
       ),
       drawer: MainDrawer(),
-      body: GridView.builder(
-        padding: EdgeInsets.all(10),
-        itemCount: dummyStat.length,
-        itemBuilder: (ctx, i) => StatisticItem(
-          dummyStat[i].id,
-          dummyStat[i].pounds,
-          dummyStat[i].rolls,
-          dummyStat[i].date,
-        ),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 3 / 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-        ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: _firestore
+            .collection('Statistics')
+            .orderBy('date', descending: true)
+            .snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text('Something went wrong');
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Text("Loading");
+          }
+
+          return GridView.builder(
+              padding: EdgeInsets.all(10),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 3 / 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              ),
+              itemCount: snapshot.data.docs.length,
+              itemBuilder: (ctx, i) {
+                DocumentSnapshot statDoc = snapshot.data.docs[i];
+                print(statDoc.data());
+                return StatisticItem(
+                  statDoc.id,
+                  statDoc['pounds'].toDouble(),
+                  statDoc['rolls'],
+                  DateTime.parse(statDoc['date'].toDate().toString()),
+                );
+              });
+        },
       ),
+      // body: GridView.builder(
+      //   padding: EdgeInsets.all(10),
+      //   itemCount: dummyStat.length,
+      //   itemBuilder: (ctx, i) => StatisticItem(
+      //     dummyStat[i].id,
+      //     dummyStat[i].pounds,
+      //     dummyStat[i].rolls,
+      //     dummyStat[i].date,
+      //   ),
+      //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      //     crossAxisCount: 2,
+      //     childAspectRatio: 3 / 2,
+      //     crossAxisSpacing: 10,
+      //     mainAxisSpacing: 10,
+      //   ),
+      // ),
     );
   }
 }
