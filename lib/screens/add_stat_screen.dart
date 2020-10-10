@@ -12,6 +12,29 @@ class AddStatScreen extends StatefulWidget {
 }
 
 class _AddStatScreenState extends State<AddStatScreen> {
+  final _poundsController = TextEditingController();
+  final _rollsController = TextEditingController();
+  DateTime selectedDate;
+
+  Future<void> _submitData() async {
+    if (_rollsController.text.isEmpty) {
+      print('fail roll empty');
+      return;
+    }
+    final enteredPounds = double.parse(_poundsController.text);
+    final enteredRolls = int.parse(_rollsController.text);
+
+    if (enteredPounds <= 0 || enteredRolls <= 0 || selectedDate == null) {
+      print('fail pounds or rolls or date');
+      return;
+    }
+    print('success');
+
+    CollectionReference statistics =
+        FirebaseFirestore.instance.collection('Statistics');
+        await statistics.add({'pounds': enteredPounds, 'rolls': enteredRolls, 'date': selectedDate});
+  }
+
   Widget _buildDirectionLabel(String title) {
     return Container(
       padding: EdgeInsets.all(10),
@@ -25,10 +48,11 @@ class _AddStatScreenState extends State<AddStatScreen> {
     );
   }
 
-  Widget _buildTextField(String labelText) {
+  Widget _buildTextField(String labelText, TextEditingController controller) {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
           labelText: labelText,
           icon: Icon(
@@ -41,13 +65,6 @@ class _AddStatScreenState extends State<AddStatScreen> {
     );
   }
 
-  // final Function addStat;
-
-  // StatisticHomeScreen(this.addStat);
-
-  ///Navigator.of(context).pop();
-
-  DateTime selectedDate;
 
   void _presentDatePicker(BuildContext context) {
     showDatePicker(
@@ -78,12 +95,12 @@ class _AddStatScreenState extends State<AddStatScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _buildDirectionLabel('add a weight.'),
-            _buildTextField('Weight:'),
+            _buildTextField('Weight:', _poundsController),
             SizedBox(
               height: 30,
             ),
             _buildDirectionLabel('add the number of rolls.'),
-            _buildTextField('Rolls: '),
+            _buildTextField('Rolls: ', _rollsController),
             SizedBox(
               height: 30,
             ),
@@ -126,13 +143,7 @@ class _AddStatScreenState extends State<AddStatScreen> {
               child: RaisedButton(
                 padding: EdgeInsets.all(15),
                 onPressed: () async {
-                  CollectionReference statistics =
-                      FirebaseFirestore.instance.collection('Statistics');
-                  await statistics.add({
-                    'pounds': 45,
-                    'rolls': 4,
-                    'date': selectedDate,
-                  });
+                 await _submitData();
                 },
                 color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
