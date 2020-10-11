@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-
 class StatisticItem extends StatelessWidget {
   final String id;
   final double pounds;
@@ -20,19 +19,27 @@ class StatisticItem extends StatelessWidget {
         ),
         alignment: Alignment.topCenter,
         padding: EdgeInsets.all(10),
-        child: Column(
-          children: [
-            Text(
-              pounds.toString() + ' pounds',
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            Text(
-              rolls.toString() + ' rolls',
-            ),
-            Text(
-              DateFormat.yMMMd().format(date),
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Text(
+                pounds.toString() + ' pounds',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              Text(
+                rolls.toString() + ' rolls',
+              ),
+              Text(
+                DateFormat.yMMMd().format(date),
+              ),
+              IconButton(
+                icon: Icon(Icons.delete),
+                color: Theme.of(context).errorColor,
+                iconSize: 30,
+                onPressed: () {},
+              )
+            ],
+          ),
         ),
       ),
     );

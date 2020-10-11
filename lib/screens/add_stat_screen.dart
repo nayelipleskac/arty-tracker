@@ -16,23 +16,40 @@ class _AddStatScreenState extends State<AddStatScreen> {
   final _rollsController = TextEditingController();
   DateTime selectedDate;
 
-  Future<void> _submitData() async {
+  Future<Widget> _submitData() async {
     if (_rollsController.text.isEmpty) {
-      print('fail roll empty');
-      return;
+      print('fail- roll empty');
+      setState(() {
+        return Container(
+          alignment: Alignment.bottomCenter,
+          child: Text(
+            'Enter a roll count!',
+            style: Theme.of(context).textTheme.headline6,
+          ),
+        );
+      });
     }
     final enteredPounds = double.parse(_poundsController.text);
     final enteredRolls = int.parse(_rollsController.text);
 
     if (enteredPounds <= 0 || enteredRolls <= 0 || selectedDate == null) {
-      print('fail pounds or rolls or date');
-      return;
+      print('fail- pounds or rolls or date not sufficient');
+      setState(() {
+        return Container(
+          alignment: Alignment.bottomCenter,
+          child: Text(
+            'Remember to enter a positive weight/roll count and a date!',
+            style: Theme.of(context).textTheme.headline6,
+          ),
+        );
+      });
     }
     print('success');
 
     CollectionReference statistics =
         FirebaseFirestore.instance.collection('Statistics');
-        await statistics.add({'pounds': enteredPounds, 'rolls': enteredRolls, 'date': selectedDate});
+    await statistics.add(
+        {'pounds': enteredPounds, 'rolls': enteredRolls, 'date': selectedDate});
   }
 
   Widget _buildDirectionLabel(String title) {
@@ -64,7 +81,6 @@ class _AddStatScreenState extends State<AddStatScreen> {
       ),
     );
   }
-
 
   void _presentDatePicker(BuildContext context) {
     showDatePicker(
@@ -143,7 +159,7 @@ class _AddStatScreenState extends State<AddStatScreen> {
               child: RaisedButton(
                 padding: EdgeInsets.all(15),
                 onPressed: () async {
-                 await _submitData();
+                  await _submitData();
                 },
                 color: Theme.of(context).primaryColor,
                 textColor: Colors.white,

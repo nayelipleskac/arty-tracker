@@ -73,7 +73,7 @@ class _StatisticHomeScreenState extends State<StatisticHomeScreen> {
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
-            return Text('Something went wrong');
+            return Text('Something went wrong...');
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
