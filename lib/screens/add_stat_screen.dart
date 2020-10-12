@@ -15,6 +15,7 @@ class _AddStatScreenState extends State<AddStatScreen> {
   final _poundsController = TextEditingController();
   final _rollsController = TextEditingController();
   DateTime selectedDate;
+  String feedback = '';
 
   Future<Widget> _submitData() async {
     if (_rollsController.text.isEmpty) {
@@ -34,15 +35,11 @@ class _AddStatScreenState extends State<AddStatScreen> {
 
     if (enteredPounds <= 0 || enteredRolls <= 0 || selectedDate == null) {
       print('fail- pounds or rolls or date not sufficient');
-      setState(() {
-        return Container(
-          alignment: Alignment.bottomCenter,
-          child: Text(
-            'Remember to enter a positive weight/roll count and a date!',
-            style: Theme.of(context).textTheme.headline6,
-          ),
-        );
-      });
+
+      return Text(
+        feedback = 'Remember to enter a positive weight/roll count and a date!',
+        style: Theme.of(context).textTheme.headline6,
+      );
     }
     print('success');
 
@@ -168,6 +165,14 @@ class _AddStatScreenState extends State<AddStatScreen> {
                 ),
               ),
             ),
+            Center(
+              child: Text(
+                feedback,
+                style: TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+            )
           ],
         ),
       ),
