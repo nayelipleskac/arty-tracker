@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../widgets/drawer.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddStatScreen extends StatefulWidget {
   static const routeName = '/addStat';

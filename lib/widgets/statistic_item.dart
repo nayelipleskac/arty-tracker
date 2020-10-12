@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class StatisticItem extends StatelessWidget {
+class StatisticItem extends StatefulWidget {
   final String id;
   final double pounds;
   final int rolls;
   final DateTime date;
 
   StatisticItem(this.id, this.pounds, this.rolls, this.date);
+
+  @override
+  _StatisticItemState createState() => _StatisticItemState();
+}
+
+class _StatisticItemState extends State<StatisticItem> {
+  Future<void> _submitDelete(String id) async {
+    DocumentReference ref =
+        FirebaseFirestore.instance.collection('Statistics').doc(id);
+    await ref.delete();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,21 +35,23 @@ class StatisticItem extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                pounds.toString() + ' pounds',
+                widget.pounds.toString() + ' pounds',
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(
-                rolls.toString() + ' rolls',
+                widget.rolls.toString() + ' rolls',
               ),
               Text(
-                DateFormat.yMMMd().format(date),
+                DateFormat.yMMMd().format(widget.date),
               ),
               IconButton(
                 icon: Icon(Icons.delete),
                 color: Theme.of(context).errorColor,
                 iconSize: 30,
-                onPressed: () {},
-              )
+                onPressed: () async {
+                  await _submitDelete(widget.id);
+                },
+              ),
             ],
           ),
         ),
