@@ -16,19 +16,20 @@ class _AddStatScreenState extends State<AddStatScreen> {
   final _rollsController = TextEditingController();
   DateTime selectedDate;
   String feedback = '';
+  bool success = false;
 
-  Future<Widget> _submitData() async {
-    if (_rollsController.text.isEmpty) {
-      print('fail- roll empty');
+  Future<void> _submitData() async {
+    // setState(() {
+    //   feedback = 'testing';
+    // });
+    if (_poundsController.text.isEmpty) {
+      print('fail- pound empty');
+
       setState(() {
-        return Container(
-          alignment: Alignment.bottomCenter,
-          child: Text(
-            'Enter a roll count!',
-            style: Theme.of(context).textTheme.headline6,
-          ),
-        );
+        feedback = 'Enter a pound count!';
+        success = false;
       });
+      return;
     }
     final enteredPounds = double.parse(_poundsController.text);
     final enteredRolls = int.parse(_rollsController.text);
@@ -36,12 +37,14 @@ class _AddStatScreenState extends State<AddStatScreen> {
     if (enteredPounds <= 0 || enteredRolls <= 0 || selectedDate == null) {
       print('fail- pounds or rolls or date not sufficient');
 
-      return Text(
-        feedback = 'Remember to enter a positive weight/roll count and a date!',
-        style: Theme.of(context).textTheme.headline6,
-      );
+      setState(() {
+        feedback = 'Remember to enter a positive weight/roll count and a date!';
+        success = false;
+      });
+      return;
     }
     print('success');
+    success = true;
 
     CollectionReference statistics =
         FirebaseFirestore.instance.collection('Statistics');
@@ -156,7 +159,9 @@ class _AddStatScreenState extends State<AddStatScreen> {
               child: RaisedButton(
                 padding: EdgeInsets.all(15),
                 onPressed: () async {
-                  await _submitData();
+                  success == true
+                      ? Navigator.of(context).pushReplacementNamed('/')
+                      : await _submitData();
                 },
                 color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
