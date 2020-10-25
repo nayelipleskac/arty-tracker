@@ -45,6 +45,7 @@ class _AddStatScreenState extends State<AddStatScreen> {
     }
     print('success');
     success = true;
+    Navigator.of(context).pushReplacementNamed('/');
 
     CollectionReference statistics =
         FirebaseFirestore.instance.collection('Statistics');
@@ -159,10 +160,9 @@ class _AddStatScreenState extends State<AddStatScreen> {
               child: RaisedButton(
                 padding: EdgeInsets.all(15),
                 onPressed: () async {
-                  if (success == true) {
-                    print('going to /');
-                    Navigator.of(context).pushReplacementNamed('/');
-                  }
+                  // if (success == true) {
+                  //   print('going to /');
+                  // }
                   if (success == false) {
                     await _submitData();
                   }
