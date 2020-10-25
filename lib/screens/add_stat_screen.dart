@@ -22,11 +22,11 @@ class _AddStatScreenState extends State<AddStatScreen> {
     // setState(() {
     //   feedback = 'testing';
     // });
-    if (_poundsController.text.isEmpty) {
-      print('fail- pound empty');
+    if (_poundsController.text.isEmpty || _rollsController.text.isEmpty || selectedDate == null) {
+      print('fail- one field is empty');
 
       setState(() {
-        feedback = 'Enter a pound count!';
+        feedback = 'Enter a value for all fields!';
         success = false;
       });
       return;
@@ -34,11 +34,11 @@ class _AddStatScreenState extends State<AddStatScreen> {
     final enteredPounds = double.parse(_poundsController.text);
     final enteredRolls = int.parse(_rollsController.text);
 
-    if (enteredPounds <= 0 || enteredRolls <= 0 || selectedDate == null) {
-      print('fail- pounds or rolls or date not sufficient');
+    if (enteredPounds <= 0 || enteredRolls <= 0) {
+      print('fail- pounds or rolls not positive');
 
       setState(() {
-        feedback = 'Remember to enter a positive weight/roll count and a date!';
+        feedback = 'Remember to enter a positive weight/roll count!';
         success = false;
       });
       return;
@@ -159,9 +159,13 @@ class _AddStatScreenState extends State<AddStatScreen> {
               child: RaisedButton(
                 padding: EdgeInsets.all(15),
                 onPressed: () async {
-                  success == true
-                      ? Navigator.of(context).pushReplacementNamed('/')
-                      : await _submitData();
+                  if (success == true) {
+                    print('going to /');
+                    Navigator.of(context).pushReplacementNamed('/');
+                  }
+                  if (success == false) {
+                    await _submitData();
+                  }
                 },
                 color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
