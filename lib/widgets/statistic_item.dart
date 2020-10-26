@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../screens/statistic_home_screen.dart';
+
 class StatisticItem extends StatefulWidget {
   final String id;
   final double pounds;
@@ -15,6 +17,12 @@ class StatisticItem extends StatefulWidget {
 }
 
 class _StatisticItemState extends State<StatisticItem> {
+  final appBar = AppBar(
+    title: Text(
+      'Arty Tracker',
+    ),
+  );
+
   Future<void> _submitDelete(String id) async {
     DocumentReference ref =
         FirebaseFirestore.instance.collection('Statistics').doc(id);
@@ -25,6 +33,7 @@ class _StatisticItemState extends State<StatisticItem> {
   Widget build(BuildContext context) {
     return GridTile(
       child: Container(
+        height: MediaQuery.of(context).size.height * 0.9,
         decoration: BoxDecoration(
           color: Colors.blue[200],
           borderRadius: BorderRadius.circular(15),

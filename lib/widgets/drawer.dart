@@ -3,20 +3,24 @@ import 'package:flutter/material.dart';
 import '../screens/add_stat_screen.dart';
 
 class MainDrawer extends StatelessWidget {
+
   Widget buildListTile(String title, IconData icon, Function tapHandler) {
-    return ListTile(
-      leading: Icon(
-        icon,
-        size: 30,
+    return Container(
+      //height: MediaQuery.of(context).size.height * 0.2,
+      child: ListTile(
+        leading: Icon(
+          icon,
+          size: 30,
+        ),
+        title: Text(
+          title,
+          style: TextStyle(
+              fontFamily: 'RobotoCondensed',
+              fontSize: 30,
+              fontWeight: FontWeight.w600),
+        ),
+        onTap: tapHandler,
       ),
-      title: Text(
-        title,
-        style: TextStyle(
-            fontFamily: 'RobotoCondensed',
-            fontSize: 30,
-            fontWeight: FontWeight.w600),
-      ),
-      onTap: tapHandler,
     );
   }
 
@@ -34,17 +38,22 @@ class MainDrawer extends StatelessWidget {
               color: Colors.green[200],
               borderRadius: BorderRadius.circular(50),
             ),
-            child: Text(
-              'The Arty Weight Tracker',
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.w600,
-                color: Theme.of(context).accentColor,
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.16,
+              child: Text(
+                'The Arty Weight Tracker',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w600,
+                  color: Theme.of(context).accentColor,
+                ),
               ),
             ),
           ),
-          SizedBox(
-            height: 20,
+          Container(
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.015,
+            ),
           ),
           buildListTile('Home', Icons.home, () {
             Navigator.of(context).pushReplacementNamed('/');

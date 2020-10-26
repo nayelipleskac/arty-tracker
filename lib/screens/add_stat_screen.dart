@@ -22,7 +22,9 @@ class _AddStatScreenState extends State<AddStatScreen> {
     // setState(() {
     //   feedback = 'testing';
     // });
-    if (_poundsController.text.isEmpty || _rollsController.text.isEmpty || selectedDate == null) {
+    if (_poundsController.text.isEmpty ||
+        _rollsController.text.isEmpty ||
+        selectedDate == null) {
       print('fail- one field is empty');
 
       setState(() {
@@ -108,81 +110,86 @@ class _AddStatScreenState extends State<AddStatScreen> {
       ),
       drawer: MainDrawer(),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _buildDirectionLabel('add a weight.'),
-            _buildTextField('Weight:', _poundsController),
-            SizedBox(
-              height: 30,
-            ),
-            _buildDirectionLabel('add the number of rolls.'),
-            _buildTextField('Rolls: ', _rollsController),
-            SizedBox(
-              height: 30,
-            ),
-            _buildDirectionLabel('add a date.'),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: RaisedButton(
-                onPressed: () => _presentDatePicker(context),
-                color: Theme.of(context).primaryColor,
-                textColor: Colors.white,
-                child: Text('choose date'),
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.8,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              _buildDirectionLabel('add a weight.'),
+              _buildTextField('Weight:', _poundsController),
+              SizedBox(
+                height: 30,
               ),
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              child: Row(
-                children: <Widget>[
-                  Text('chosen date: '),
-                  selectedDate == null
-                      ? Text(
-                          ' No Date Chosen!',
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )
-                      : Text(
-                          DateFormat.yMMMd().format(selectedDate),
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                ],
+              _buildDirectionLabel('add the number of rolls.'),
+              _buildTextField('Rolls: ', _rollsController),
+              SizedBox(
+                height: 30,
               ),
-            ),
-            Container(
-              height: 70,
-              alignment: Alignment.center,
-              child: RaisedButton(
-                padding: EdgeInsets.all(15),
-                onPressed: () async {
-                  // if (success == true) {
-                  //   print('going to /');
-                  // }
-                  if (success == false) {
-                    await _submitData();
-                  }
-                },
-                color: Theme.of(context).primaryColor,
-                textColor: Colors.white,
+              _buildDirectionLabel('add a date.'),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: RaisedButton(
+                  onPressed: () => _presentDatePicker(context),
+                  color: Theme.of(context).primaryColor,
+                  textColor: Colors.white,
+                  child: Text('choose date'),
+                ),
+              ),
+              Container(
+                //height: MediaQuery.of(context).size.height * 0.4,
+                padding: EdgeInsets.all(10),
+                child: Row(
+                  children: <Widget>[
+                    Text('chosen date: '),
+                    selectedDate == null
+                        ? Text(
+                            ' No Date Chosen!',
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        : Text(
+                            DateFormat.yMMMd().format(selectedDate),
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                  ],
+                ),
+              ),
+              Container(
+                height: 70,
+                //height: MediaQuery.of(context).size.height * 0.1,
+                alignment: Alignment.center,
+                child: RaisedButton(
+                  padding: EdgeInsets.all(15),
+                  onPressed: () async {
+                    // if (success == true) {
+                    //   print('going to /');
+                    // }
+                    if (success == false) {
+                      await _submitData();
+                    }
+                  },
+                  color: Theme.of(context).primaryColor,
+                  textColor: Colors.white,
+                  child: Text(
+                    'Save Statistic',
+                  ),
+                ),
+              ),
+              Center(
                 child: Text(
-                  'Save Statistic',
+                  feedback,
+                  style: TextStyle(
+                    color: Colors.red,
+                  ),
                 ),
-              ),
-            ),
-            Center(
-              child: Text(
-                feedback,
-                style: TextStyle(
-                  color: Colors.red,
-                ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

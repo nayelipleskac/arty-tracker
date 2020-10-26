@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../widgets/drawer.dart';
 import '../widgets/statistic_item.dart';
-import '../models/statistic.dart';
-import './add_stat_screen.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -59,12 +57,13 @@ class _StatisticHomeScreenState extends State<StatisticHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    final appBar = AppBar(
         title: Text(
           'Arty Tracker',
         ),
-      ),
+      );
+    return Scaffold(
+      appBar: appBar, 
       drawer: MainDrawer(),
       body: StreamBuilder<QuerySnapshot>(
         stream: _firestore
