@@ -1,5 +1,6 @@
 // headline6 = title
 
+import 'package:arty_tracker/screens/averages_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         '/': (ctx) => StatisticHomeScreen(),
         StatisticHomeScreen.routeName: (ctx) => StatisticHomeScreen(),
         AddStatScreen.routeName: (ctx) => AddStatScreen(),
+        AveragesScreen.routeName: (ctx) => AveragesScreen(), 
       },
     );
   }

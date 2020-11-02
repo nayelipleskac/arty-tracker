@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../screens/add_stat_screen.dart';
+import '../screens/averages_screen.dart';
+
 
 class MainDrawer extends StatelessWidget {
-
   Widget buildListTile(String title, IconData icon, Function tapHandler) {
     return Container(
       //height: MediaQuery.of(context).size.height * 0.2,
@@ -61,6 +62,9 @@ class MainDrawer extends StatelessWidget {
           buildListTile('Add', Icons.add, () {
             Navigator.of(context).pushReplacementNamed(AddStatScreen.routeName);
           }),
+          buildListTile('Averages', Icons.line_style, () {
+            Navigator.of(context).pushReplacementNamed(AveragesScreen.routeName);
+          })
         ],
       ),
     );
