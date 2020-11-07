@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class AveragesScreen extends StatefulWidget {
-  static const routeName = '/statistic-home';
+  static const routeName = '/statistic-detail';
 
   @override
   _AveragesScreenState createState() => _AveragesScreenState();

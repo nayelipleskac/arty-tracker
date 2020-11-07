@@ -6,14 +6,14 @@ import '../widgets/statistic_item.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-class StatisticHomeScreen extends StatefulWidget {
+class StatisticDetailScreen extends StatefulWidget {
   static const routeName = '/statistic-home';
 
   @override
-  _StatisticHomeScreenState createState() => _StatisticHomeScreenState();
+  _StatisticDetailScreenState createState() => _StatisticDetailScreenState();
 }
 
-class _StatisticHomeScreenState extends State<StatisticHomeScreen> {
+class _StatisticDetailScreenState extends State<StatisticDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final appBar = AppBar(

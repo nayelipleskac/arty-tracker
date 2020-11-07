@@ -1,8 +1,8 @@
+import 'package:arty_tracker/screens/statistic_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/add_stat_screen.dart';
-import '../screens/averages_screen.dart';
-
+import '../screens/averages_home_screen.dart';
 
 class MainDrawer extends StatelessWidget {
   Widget buildListTile(String title, IconData icon, Function tapHandler) {
@@ -59,12 +59,13 @@ class MainDrawer extends StatelessWidget {
           buildListTile('Home', Icons.home, () {
             Navigator.of(context).pushReplacementNamed('/');
           }),
+          buildListTile('Tiles', Icons.line_style, () {
+            Navigator.of(context)
+                .pushReplacementNamed(StatisticDetailScreen.routeName);
+          }),
           buildListTile('Add', Icons.add, () {
             Navigator.of(context).pushReplacementNamed(AddStatScreen.routeName);
           }),
-          buildListTile('Averages', Icons.line_style, () {
-            Navigator.of(context).pushReplacementNamed(AveragesScreen.routeName);
-          })
         ],
       ),
     );

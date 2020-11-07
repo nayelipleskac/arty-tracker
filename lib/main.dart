@@ -1,10 +1,10 @@
 // headline6 = title
 
-import 'package:arty_tracker/screens/averages_screen.dart';
+import 'package:arty_tracker/screens/averages_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-import './screens/statistic_home_screen.dart';
+import 'screens/statistic_detail_screen.dart';
 import './screens/add_stat_screen.dart';
 
 void main() async {
@@ -38,10 +38,10 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      // home: StatisticHomeScreen(),
+      // home: AveragesScreen(),
       routes: {
-        '/': (ctx) => StatisticHomeScreen(),
-        StatisticHomeScreen.routeName: (ctx) => StatisticHomeScreen(),
+        '/': (ctx) => AveragesScreen(),
+        StatisticDetailScreen.routeName: (ctx) => StatisticDetailScreen(),
         AddStatScreen.routeName: (ctx) => AddStatScreen(),
         AveragesScreen.routeName: (ctx) => AveragesScreen(), 
       },
