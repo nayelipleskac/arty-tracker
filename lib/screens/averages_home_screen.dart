@@ -44,25 +44,54 @@ class _AveragesScreenState extends State<AveragesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('The Averages'),
+        title: Text('The Home Screen'),
       ),
       drawer: MainDrawer(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 20,),
-            Container(
-              padding: EdgeInsets.all(50),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.circular(70),
-              ),
-              child: Text(
-                average.toString() + ' pounds',
-                style: Theme.of(context).textTheme.headline6,
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                padding: EdgeInsets.all(50),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: BorderRadius.circular(70),
+                ),
+                child: Text(
+                  average.toString() + ' pounds',
+                  style: Theme.of(context).textTheme.headline6,
+                ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: ClipOval(
+                child: Image.asset(
+                  "assets/images/arty.jpg",
+                  fit: BoxFit.cover,
+                  height: 300,
+                ),
+              ),
+            ),
+            Text(
+              'Fun Facts About Arty!',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                'His birthday is October 10, 2005',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            
           ],
         ),
       ),

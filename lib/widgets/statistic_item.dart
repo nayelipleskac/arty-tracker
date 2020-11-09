@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../screens/statistic_detail_screen.dart';
-
 class StatisticItem extends StatefulWidget {
   final String id;
   final double pounds;
