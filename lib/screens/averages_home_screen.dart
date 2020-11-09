@@ -23,12 +23,18 @@ class _AveragesScreenState extends State<AveragesScreen> {
         .then((QuerySnapshot querySnapshot) => querySnapshot.docs);
     double total = 0;
     for (var i = 0; i < docList.length; i++) {
-      print('Single DOC : ' + docList[i].toString());
+      print('Single doc : ' + docList[i].toString());
       total += docList[i]['pounds'].toDouble();
     }
     print(total);
     average = total / docList.length;
   }
+
+  List<String> facts = [
+    'His birthday is October 10, 2005.',
+    'Arty likes to go on bikerides and trips to the beach.',
+    'Smells rather like AGED cheese when he has no bath for more than two weeks.',
+  ];
 
   @override
   void initState() {
@@ -60,13 +66,13 @@ class _AveragesScreenState extends State<AveragesScreen> {
                   borderRadius: BorderRadius.circular(70),
                 ),
                 child: Text(
-                  average.toString() + ' pounds',
+                  average == null ? '' : average.toStringAsFixed(1) + ' pounds',
                   style: Theme.of(context).textTheme.headline6,
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(8.0),
               child: ClipOval(
                 child: Image.asset(
                   "assets/images/arty.jpg",
@@ -75,23 +81,50 @@ class _AveragesScreenState extends State<AveragesScreen> {
                 ),
               ),
             ),
-            Text(
-              'Fun Facts About Arty!',
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
+            IconButton(
+              icon: Icon(
+                Icons.add_circle,
+                size: 40,
+                color: Colors.lime,
+              ),
+              onPressed: () {},
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Fun Facts About Arty!',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(8.0),
               child: Text(
-                'His birthday is October 10, 2005',
+                facts[0],
                 style: TextStyle(
                   fontSize: 20,
                 ),
               ),
             ),
-            
+            Text(
+              facts[1],
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                facts[2],
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
           ],
         ),
       ),
