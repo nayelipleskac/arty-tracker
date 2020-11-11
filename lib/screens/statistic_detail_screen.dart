@@ -7,7 +7,7 @@ import '../widgets/statistic_item.dart';
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class StatisticDetailScreen extends StatefulWidget {
-  static const routeName = '/statistic-home';
+  static const routeName = '/statistic-detail';
 
   @override
   _StatisticDetailScreenState createState() => _StatisticDetailScreenState();

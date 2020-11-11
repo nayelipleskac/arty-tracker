@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../widgets/drawer.dart';
+import '../screens/statistic_detail_screen.dart';
+
 
 class AddStatScreen extends StatefulWidget {
   static const routeName = '/addStat';
@@ -47,7 +49,7 @@ class _AddStatScreenState extends State<AddStatScreen> {
     }
     print('success');
     success = true;
-    Navigator.of(context).pushReplacementNamed('/');
+    Navigator.of(context).pushReplacementNamed(StatisticDetailScreen.routeName);
 
     CollectionReference statistics =
         FirebaseFirestore.instance.collection('Statistics');

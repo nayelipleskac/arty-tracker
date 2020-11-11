@@ -1,11 +1,12 @@
-import '../widgets/drawer.dart';
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+
+import '../widgets/drawer.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class AveragesScreen extends StatefulWidget {
-  static const routeName = '/statistic-detail';
+  static const routeName = '/statistic-average';
 
   @override
   _AveragesScreenState createState() => _AveragesScreenState();
@@ -13,6 +14,8 @@ class AveragesScreen extends StatefulWidget {
 
 class _AveragesScreenState extends State<AveragesScreen> {
   double average;
+
+  final _factController = TextEditingController();
 
   Future<void> getAverage() async {
     //querySnapshot is the collection
@@ -35,6 +38,41 @@ class _AveragesScreenState extends State<AveragesScreen> {
     'Arty likes to go on bikerides and trips to the beach.',
     'Smells rather like AGED cheese when he has no bath for more than two weeks.',
   ];
+
+  void _startAddFunFact(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Text(
+                  'Remember when adding a new fun fact, it should be relevant, unique and entertaining!',
+                  style: TextStyle(
+                      fontFamily: 'RobotoCondensed',
+                      fontSize: 25,
+                      fontWeight: FontWeight.w300),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: _factController,
+                  decoration: InputDecoration(
+                      labelText: 'Type fun fact here...',
+                      icon: Icon(
+                        Icons.note_add,
+                      )),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   @override
   void initState() {
@@ -87,7 +125,7 @@ class _AveragesScreenState extends State<AveragesScreen> {
                 size: 40,
                 color: Colors.lime,
               ),
-              onPressed: () {},
+              onPressed: () => _startAddFunFact(context),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
