@@ -42,10 +42,10 @@ class _AveragesScreenState extends State<AveragesScreen> {
     'Smells rather like AGED cheese when he has no bath for more than two weeks.',
   ];
 
-  Future <void> submitFunFact() {
+  Future<void> submitFunFact() {
     if (_factController.text.isEmpty) {
       print('fun fact field is empty');
-      
+
       setState(() {
         success = false;
         factFeedback = 'Enter a value';
@@ -82,9 +82,14 @@ class _AveragesScreenState extends State<AveragesScreen> {
                 ),
               ),
               RaisedButton(
-                child: Text('Add Fun Fact'),
+                child: Text(
+                  'Add Fun Fact',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
                 color: Theme.of(context).primaryColor,
-                onPressed: () {},
+                onPressed: submitFunFact,
               ),
             ],
           ),
