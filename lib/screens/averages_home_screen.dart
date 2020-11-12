@@ -18,6 +18,7 @@ class _AveragesScreenState extends State<AveragesScreen> {
   final _factController = TextEditingController();
 
   String factFeedback = '';
+  bool success = false;
 
   Future<void> getAverage() async {
     //querySnapshot is the collection
@@ -44,6 +45,11 @@ class _AveragesScreenState extends State<AveragesScreen> {
   Future <void> submitFunFact() {
     if (_factController.text.isEmpty) {
       print('fun fact field is empty');
+      
+      setState(() {
+        success = false;
+        factFeedback = 'Enter a value';
+      });
     }
   }
 
