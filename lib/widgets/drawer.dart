@@ -16,9 +16,11 @@ class MainDrawer extends StatelessWidget {
         title: Text(
           title,
           style: TextStyle(
-              fontFamily: 'RobotoCondensed',
-              fontSize: 30,
-              fontWeight: FontWeight.w600),
+            fontFamily: 'RobotoCondensed',
+            fontSize: 30,
+
+            fontWeight: FontWeight.w600,
+          ),
         ),
         onTap: tapHandler,
       ),
@@ -46,7 +48,7 @@ class MainDrawer extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.w600,
-                  color: Theme.of(context).accentColor,
+                  color: Colors.grey,
                 ),
               ),
             ),

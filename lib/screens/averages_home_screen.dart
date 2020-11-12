@@ -17,6 +17,8 @@ class _AveragesScreenState extends State<AveragesScreen> {
 
   final _factController = TextEditingController();
 
+  String factFeedback = '';
+
   Future<void> getAverage() async {
     //querySnapshot is the collection
     //.docs are the documents in the collection
@@ -39,11 +41,17 @@ class _AveragesScreenState extends State<AveragesScreen> {
     'Smells rather like AGED cheese when he has no bath for more than two weeks.',
   ];
 
+  Future <void> submitFunFact() {
+    if (_factController.text.isEmpty) {
+      print('fun fact field is empty');
+    }
+  }
+
   void _startAddFunFact(BuildContext ctx) {
     showModalBottomSheet(
       context: ctx,
       builder: (_) {
-        return SingleChildScrollView(
+        return Container(
           child: Column(
             children: [
               Padding(
@@ -66,6 +74,11 @@ class _AveragesScreenState extends State<AveragesScreen> {
                         Icons.note_add,
                       )),
                 ),
+              ),
+              RaisedButton(
+                child: Text('Add Fun Fact'),
+                color: Theme.of(context).primaryColor,
+                onPressed: () {},
               ),
             ],
           ),

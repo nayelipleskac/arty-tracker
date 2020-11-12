@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Arty Tracker',
       theme: ThemeData(
-        primaryColor: Colors.blue,
-        accentColor: Colors.grey,
+        primaryColor: Colors.indigo,
+        accentColor: Colors.white,
         fontFamily: 'Raleway',
         textTheme: ThemeData.light().textTheme.copyWith(
               bodyText1: TextStyle(
@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
                 fontSize: 30,
                 fontFamily: 'RobotoCondensed',
                 fontWeight: FontWeight.bold,
+                color: Colors.white,
               ),
             ),
       ),
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
         '/': (ctx) => AveragesScreen(),
         StatisticDetailScreen.routeName: (ctx) => StatisticDetailScreen(),
         AddStatScreen.routeName: (ctx) => AddStatScreen(),
-        AveragesScreen.routeName: (ctx) => AveragesScreen(), 
+        AveragesScreen.routeName: (ctx) => AveragesScreen(),
       },
     );
   }

@@ -33,7 +33,7 @@ class _StatisticItemState extends State<StatisticItem> {
       child: Container(
         height: MediaQuery.of(context).size.height * 0.9,
         decoration: BoxDecoration(
-          color: Colors.blue[200],
+          color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(15),
         ),
         alignment: Alignment.topCenter,
@@ -47,9 +47,11 @@ class _StatisticItemState extends State<StatisticItem> {
               ),
               Text(
                 widget.rolls.toString() + ' rolls',
+                style: TextStyle(color: Colors.white),
               ),
               Text(
                 DateFormat.yMMMd().format(widget.date),
+                style: TextStyle(color: Colors.white),
               ),
               IconButton(
                 icon: Icon(Icons.delete),
