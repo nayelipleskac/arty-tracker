@@ -38,6 +38,16 @@ class _AveragesScreenState extends State<AveragesScreen> {
     average = total / docList.length;
   }
 
+  Future<void> getFacts() async {
+    List<QueryDocumentSnapshot> factList = await _firestore
+        .collection('Fun Facts')
+        .get()
+        .then((QuerySnapshot querySnapShot) => querySnapShot.docs);
+    factList.forEach((doc) {
+      doc['fun fact'].add(facts);
+    });
+  }
+
   List<String> facts = [
     'His birthday is October 10, 2005.',
     'Arty likes to go on bikerides and trips to the beach.',
@@ -52,7 +62,6 @@ class _AveragesScreenState extends State<AveragesScreen> {
         success = false;
         factFeedback = 'Enter a fun fact';
       });
-
       //return;
     }
     success = true;
@@ -73,55 +82,54 @@ class _AveragesScreenState extends State<AveragesScreen> {
           padding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Text(
-                      'Remember when adding a new fun fact, it should be relevant, unique and entertaining!',
-                      style: TextStyle(
-                        fontFamily: 'RobotoCondensed',
-                        fontSize: 25,
-                        fontWeight: FontWeight.w300,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(
+                    'Remember when adding a new fun fact, it should be relevant, unique and entertaining!',
+                    style: TextStyle(
+                      fontFamily: 'RobotoCondensed',
+                      fontSize: 25,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: _factController,
+                    decoration: InputDecoration(
+                      labelText: 'Type fun fact here...',
+                      icon: Icon(
+                        Icons.note_add,
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _factController,
-                      decoration: InputDecoration(
-                        labelText: 'Type fun fact here...',
-                        icon: Icon(
-                          Icons.note_add,
-                        ),
-                      ),
+                ),
+                RaisedButton(
+                  child: Text(
+                    'Add Fun Fact',
+                    style: TextStyle(
+                      color: Colors.white,
                     ),
                   ),
-                  RaisedButton(
-                    child: Text(
-                      'Add Fun Fact',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                    color: Theme.of(context).primaryColor,
-                    onPressed: () => _submitFunFact(),
-                  ),
-                  Center(
-                    child: Text(
-                      factFeedback,
-                      style: TextStyle(
-                        color: Colors.red,
-                      ),
+                  color: Theme.of(context).primaryColor,
+                  onPressed: () => _submitFunFact(),
+                ),
+                Center(
+                  child: Text(
+                    factFeedback,
+                    style: TextStyle(
+                      color: Colors.red,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-     
+          ),
         );
       },
     );
@@ -130,12 +138,13 @@ class _AveragesScreenState extends State<AveragesScreen> {
   @override
   void initState() {
     getAverage().then((_) {
-      setState(() {
-        print('completed');
+      getFacts().then((_) {
+        setState(() {
+          print('completed');
+        });
       });
     });
     super.initState();
-    querySnapShot = FirebaseFirestore.instance.collection('Fun Facts').get();
   }
 
   @override
@@ -145,7 +154,8 @@ class _AveragesScreenState extends State<AveragesScreen> {
         title: Text('The Home Screen'),
       ),
       drawer: MainDrawer(),
-      body: Column(
+      body: SingleChildScrollView(
+        child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(10.0),
@@ -157,9 +167,14 @@ class _AveragesScreenState extends State<AveragesScreen> {
                   borderRadius: BorderRadius.circular(70),
                 ),
                 child: Text(
-                  average == null ? '' : average.toStringAsFixed(1) + ' pounds',
-                  style: Theme.of(context).textTheme.headline6,
-                ),
+                    average == null
+                        ? ''
+                        : average.toStringAsFixed(1) + ' pounds',
+                    style: TextStyle(
+                      fontFamily: 'Raleway',
+                      fontSize: 35,
+                      color: Colors.white,
+                    )),
               ),
             ),
             Padding(
@@ -217,7 +232,7 @@ class _AveragesScreenState extends State<AveragesScreen> {
               ),
             ),
           ],
-        
+        ),
       ),
     );
   }
