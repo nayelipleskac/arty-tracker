@@ -20,6 +20,8 @@ class _AveragesScreenState extends State<AveragesScreen> {
   String factFeedback = '';
   bool success = false;
 
+  Future<QuerySnapshot> querySnapShot;
+
   Future<void> getAverage() async {
     //querySnapshot is the collection
     //.docs are the documents in the collection
@@ -42,57 +44,84 @@ class _AveragesScreenState extends State<AveragesScreen> {
     'Smells rather like AGED cheese when he has no bath for more than two weeks.',
   ];
 
-  Future<void> submitFunFact() {
+  void _submitFunFact() {
     if (_factController.text.isEmpty) {
       print('fun fact field is empty');
 
       setState(() {
         success = false;
-        factFeedback = 'Enter a value';
+        factFeedback = 'Enter a fun fact';
       });
+
+      //return;
     }
+    success = true;
+    Navigator.of(context).pushReplacementNamed('/');
+    print('success for save fact');
+
+    CollectionReference funFacts =
+        FirebaseFirestore.instance.collection('Fun Facts');
+    funFacts.add({'fun fact': _factController});
   }
 
   void _startAddFunFact(BuildContext ctx) {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: ctx,
       builder: (_) {
-        return Container(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Text(
-                  'Remember when adding a new fun fact, it should be relevant, unique and entertaining!',
-                  style: TextStyle(
-                      fontFamily: 'RobotoCondensed',
-                      fontSize: 25,
-                      fontWeight: FontWeight.w300),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: _factController,
-                  decoration: InputDecoration(
-                      labelText: 'Type fun fact here...',
-                      icon: Icon(
-                        Icons.note_add,
-                      )),
-                ),
-              ),
-              RaisedButton(
-                child: Text(
-                  'Add Fun Fact',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                color: Theme.of(context).primaryColor,
-                onPressed: submitFunFact,
-              ),
-            ],
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      'Remember when adding a new fun fact, it should be relevant, unique and entertaining!',
+                      style: TextStyle(
+                        fontFamily: 'RobotoCondensed',
+                        fontSize: 25,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _factController,
+                      decoration: InputDecoration(
+                        labelText: 'Type fun fact here...',
+                        icon: Icon(
+                          Icons.note_add,
+                        ),
+                      ),
+                    ),
+                  ),
+                  RaisedButton(
+                    child: Text(
+                      'Add Fun Fact',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    color: Theme.of(context).primaryColor,
+                    onPressed: () => _submitFunFact(),
+                  ),
+                  Center(
+                    child: Text(
+                      factFeedback,
+                      style: TextStyle(
+                        color: Colors.red,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+     
         );
       },
     );
@@ -106,6 +135,7 @@ class _AveragesScreenState extends State<AveragesScreen> {
       });
     });
     super.initState();
+    querySnapShot = FirebaseFirestore.instance.collection('Fun Facts').get();
   }
 
   @override
@@ -115,8 +145,7 @@ class _AveragesScreenState extends State<AveragesScreen> {
         title: Text('The Home Screen'),
       ),
       drawer: MainDrawer(),
-      body: SingleChildScrollView(
-        child: Column(
+      body: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(10.0),
@@ -188,7 +217,7 @@ class _AveragesScreenState extends State<AveragesScreen> {
               ),
             ),
           ],
-        ),
+        
       ),
     );
   }
