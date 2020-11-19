@@ -44,14 +44,15 @@ class _AveragesScreenState extends State<AveragesScreen> {
         .get()
         .then((QuerySnapshot querySnapShot) => querySnapShot.docs);
     factList.forEach((doc) {
-      doc['fun fact'].add(facts);
+      facts.add(doc['fun fact']);
+      print('added to the list -facts-');
     });
   }
 
   List<String> facts = [
-    'His birthday is October 10, 2005.',
-    'Arty likes to go on bikerides and trips to the beach.',
-    'Smells rather like AGED cheese when he has no bath for more than two weeks.',
+    // 'His birthday is October 10, 2005.',
+    // 'Arty likes to go on bikerides and trips to the beach.',
+    // 'Smells rather like AGED cheese when he has no bath for more than two weeks.',
   ];
 
   void _submitFunFact() {
@@ -66,7 +67,8 @@ class _AveragesScreenState extends State<AveragesScreen> {
     }
     success = true;
     Navigator.of(context).pushReplacementNamed('/');
-    print('success for save fact');
+    print('SUCCESS FOR SAVED FACT');
+    print(_factController);
 
     CollectionReference funFacts =
         FirebaseFirestore.instance.collection('Fun Facts');
@@ -205,32 +207,40 @@ class _AveragesScreenState extends State<AveragesScreen> {
                 ),
               ),
             ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: Text(
+            //     facts[0],
+            //     style: TextStyle(
+            //       fontSize: 20,
+            //     ),
+            //   ),
+            // ),
+            // Text(
+            //   facts[1],
+            //   textAlign: TextAlign.center,
+            //   style: TextStyle(
+            //     fontSize: 20,
+            //   ),
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: Text(
+            //     facts[2],
+            //     textAlign: TextAlign.center,
+            //     style: TextStyle(
+            //       fontSize: 20,
+            //     ),
+            //   ),
+            // ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: Text(
-                facts[0],
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            Text(
-              facts[1],
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                facts[2],
+                facts.toString(),
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                ),
+                style: TextStyle(fontSize: 20),
               ),
-            ),
+            )
           ],
         ),
       ),
