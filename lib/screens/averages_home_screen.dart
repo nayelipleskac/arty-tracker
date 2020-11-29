@@ -65,6 +65,9 @@ class _AveragesScreenState extends State<AveragesScreen> {
       });
       //return;
     }
+
+    final enteredFact = _factController.text.toString();
+
     success = true;
     Navigator.of(context).pushReplacementNamed('/');
     print('SUCCESS FOR SAVED FACT');
@@ -72,7 +75,7 @@ class _AveragesScreenState extends State<AveragesScreen> {
 
     CollectionReference funFacts =
         FirebaseFirestore.instance.collection('Fun Facts');
-    funFacts.add({'fun fact': _factController});
+    funFacts.add({'fun fact': enteredFact});
   }
 
   void _startAddFunFact(BuildContext ctx) {
@@ -207,32 +210,6 @@ class _AveragesScreenState extends State<AveragesScreen> {
                 ),
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: Text(
-            //     facts[0],
-            //     style: TextStyle(
-            //       fontSize: 20,
-            //     ),
-            //   ),
-            // ),
-            // Text(
-            //   facts[1],
-            //   textAlign: TextAlign.center,
-            //   style: TextStyle(
-            //     fontSize: 20,
-            //   ),
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: Text(
-            //     facts[2],
-            //     textAlign: TextAlign.center,
-            //     style: TextStyle(
-            //       fontSize: 20,
-            //     ),
-            //   ),
-            // ),
             Padding(
               padding: const EdgeInsets.all(8),
               child: Text(
