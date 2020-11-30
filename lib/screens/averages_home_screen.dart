@@ -213,7 +213,7 @@ class _AveragesScreenState extends State<AveragesScreen> {
             Padding(
               padding: const EdgeInsets.all(8),
               child: Text(
-                facts.toString(),
+                facts.map((e) => null).toString(),
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20),
               ),
