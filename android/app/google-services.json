@@ -8,7 +8,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:792708837238:android:3b6b9f03c5ec8f98ba9457",
+        "mobilesdk_app_id": "1:792708837238:android:4d8cd67d3843ab66ba9457",
         "android_client_info": {
           "package_name": "com.nayelipleskac.arty_tracker"
         }
@@ -30,6 +30,13 @@
             {
               "client_id": "792708837238-qgd39iap59etmk692dlk4pjb0p50694i.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "792708837238-kva1k0o18vohslb82ihfiv4kg9cdv30t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.artyTracker"
+              }
             }
           ]
         }
