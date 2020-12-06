@@ -1,8 +1,7 @@
-import 'package:arty_tracker/screens/statistic_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/add_stat_screen.dart';
-import '../screens/averages_home_screen.dart';
+import '../screens/statistic_detail_screen.dart';
 
 class MainDrawer extends StatelessWidget {
   Widget buildListTile(String title, IconData icon, Function tapHandler) {
@@ -18,7 +17,6 @@ class MainDrawer extends StatelessWidget {
           style: TextStyle(
             fontFamily: 'RobotoCondensed',
             fontSize: 30,
-
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -32,6 +30,9 @@ class MainDrawer extends StatelessWidget {
     return Drawer(
       child: Column(
         children: <Widget>[
+          SizedBox(
+            height: 70,
+          ),
           Container(
             height: 120,
             width: 280,
