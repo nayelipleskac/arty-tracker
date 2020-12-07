@@ -39,6 +39,10 @@ class _AveragesScreenState extends State<AveragesScreen> {
   }
 
   Future<void> getFacts() async {
+    if (_factController.text.isEmpty) {
+      print('fail- fun fact field is empty');
+    }
+
     List<QueryDocumentSnapshot> factList = await _firestore
         .collection('Fun Facts')
         .get()
