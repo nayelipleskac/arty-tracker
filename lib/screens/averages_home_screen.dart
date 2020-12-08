@@ -67,7 +67,7 @@ class _AveragesScreenState extends State<AveragesScreen> {
         success = false;
         factFeedback = 'Enter a fun fact';
       });
-      //return;
+      return;
     }
 
     final enteredFact = _factController.text.toString();
@@ -220,7 +220,15 @@ class _AveragesScreenState extends State<AveragesScreen> {
                   children: facts.map((factData) {
                 return Text(factData);
               }).toList()),
-            )
+            ),
+            Center(
+              child: Text(
+                factFeedback,
+                style: TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+            ),
           ],
         ),
       ),

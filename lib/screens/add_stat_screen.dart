@@ -5,7 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../widgets/drawer.dart';
 import '../screens/statistic_detail_screen.dart';
 
-
 class AddStatScreen extends StatefulWidget {
   static const routeName = '/addStat';
 
@@ -189,7 +188,7 @@ class _AddStatScreenState extends State<AddStatScreen> {
                     color: Colors.red,
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
