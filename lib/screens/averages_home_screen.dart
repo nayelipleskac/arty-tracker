@@ -197,13 +197,16 @@ class _AveragesScreenState extends State<AveragesScreen> {
               ),
             ),
             IconButton(
-              icon: Icon(
-                Icons.add_circle,
-                size: 40,
-                color: Colors.lime,
-              ),
-              onPressed: () => _startAddFunFact(context),
-            ),
+                icon: Icon(
+                  Icons.add_circle,
+                  size: 40,
+                  color: Colors.lime,
+                ),
+                onPressed: () async {
+                  if (success == false) {
+                    _startAddFunFact(context);
+                  }
+                }),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
